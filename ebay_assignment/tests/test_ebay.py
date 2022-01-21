@@ -17,6 +17,8 @@ class TestEbay(BaseTest):
         gallery_obj.select_galaxy_note_10()
         gallery_obj.select_t_mobile_filter()
 
+        items_not_10_obj = SamsungNot10GalleryPage(self.driver)
+        items_not_10_obj.select_price_filter_under()
         subtotal_price = 0
         seen_items_num = []
         while subtotal_price < TestParams.MAX_TOTAL_PRICE:
@@ -26,12 +28,12 @@ class TestEbay(BaseTest):
             for item in items_not_10:
 
                 if item_num not in seen_items_num:
-                    item.find_element_by_tag_name("a").click()  # select item in gallery
+                    item.find_element_by_tag_name("div").click()  # select item in gallery
                     item_page_obj = ItemPage(self.driver)
                     item_page_obj.add_to_cart()
                     cart_page_obj = CartPage(self.driver)
                     subtotal_price = cart_page_obj.get_subtotal_price()
-                    if subtotal_price > 500:
+                    if subtotal_price > TestParams.MAX_TOTAL_PRICE:
                         break
                     else:
                         seen_items_num.append(item_num)
