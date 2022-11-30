@@ -49,8 +49,11 @@ class TestLogin(BaseTest):
 
             stile_parts = stile.split()
             width = int(stile_parts[4].replace("px;", ""))
+            print("aaaaaaaaaaaaa")
+            print("width:"+str(width))
             height = int(stile_parts[6].replace("px;", ""))
-            width = int(stile_parts[6].replace("px;", ""))
+            print("aaaaaadfdaaaaaaa")
+            print("height:"+str(height))
             # width = int(x.split(";")[1].replace("width: ", "").replace("px", ""))
             # height = int(x.split(";")[2].replace("heigt: ", "").replace("px", ""))
             # item.get_attribute("style")
