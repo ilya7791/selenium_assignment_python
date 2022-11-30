@@ -2,7 +2,6 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
-
 from ebay_assignment.params.parameters import TestParams
 
 
@@ -10,6 +9,7 @@ from ebay_assignment.params.parameters import TestParams
 def init_driver(request):
     global driver
     options = Options()
+    options.add_argument("--start-maximized")
     driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), chrome_options=options)
     driver.implicitly_wait(5)
     session = request.node
