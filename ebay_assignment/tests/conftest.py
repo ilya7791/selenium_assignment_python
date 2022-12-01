@@ -9,13 +9,16 @@ from ebay_assignment.params.parameters import TestParams
 def init_driver(request):
     global driver
     options = Options()
+    options.add_experimental_option("detach", True)
     options.add_argument("--start-maximized")
     driver = webdriver.Chrome(executable_path=ChromeDriverManager().install(), chrome_options=options)
-    driver.implicitly_wait(5)
+    driver.implicitly_wait(10)
     session = request.node
     for item in session.items:
         cls = item.getparent(pytest.Class)
         setattr(cls.obj, "driver", driver)
+
+
 
 
 @pytest.fixture(autouse=True)

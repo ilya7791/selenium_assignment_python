@@ -24,26 +24,67 @@ class TestLogin(BaseTest):
     # checks that a correct error message appears after incorrect login attempt
     def test_empty_username_and_password(self):
         login = LoginPage(self.driver)
-        self.driver.find_element("css selector","[data-track='gnSignin']").click()
-        self.driver.find_element("id", "login-email").send_keys("ilya7791@gmail.com")
-        self.driver.find_element("css selector", "[class='user-select-none']").click()
-        self.driver.find_element("id", "login-password").send_keys("vjm9wUiu123@")
-        self.driver.find_element("css selector", "[class='user-select-none']").click()
+        # login.click_login_btn()
+        # login.insert_user_name("ilya7791@gmail.com")
+        # login.click_next_btn()
+        # login.insert_user_password("vjm9wUiu123@")
+        # login.click_sign_in_btn()
+        login.perform_login("ilya7791@gmail.com", "vjm9wUiu123@")
+
+        time.sleep(999)
+        # self.driver.find_element("css selector","[data-track='gnSignin']").click()
+        # self.driver.find_element("id", "login-email").send_keys("ilya7791@gmail.com")
+        # self.driver.find_element("css selector", "[class='user-select-none']").click()
+        # self.driver.find_element("id", "login-password").send_keys("vjm9wUiu123@")
+        # self.driver.find_element("css selector", "[class='user-select-none']").click()
 
         self.driver.find_element("id", "search-field").send_keys("cat")
         self.driver.find_element("id", "search-field").send_keys(Keys.ENTER)
         time.sleep(3)
         self.driver.find_element("css selector", "[data-track='search-toggle-advanced']").click()
         time.sleep(3)
+
+        # # self.driver.find_element("css selector", "[data-orientation-value='landscape']").click()
+        # # time.sleep(3)
+        # self.driver.find_element("css selector", "[data-orientation-value='portrait']").click()
+        # time.sleep(3)
+        # self.driver.find_element("css selector", "[data-orientation-value='square']").click()
+        # time.sleep(3)
+        # self.driver.find_element("css selector", "[data-orientation-value='panorama']").click()
+        # time.sleep(3)
+
         # self.driver.find_element("css selector", "[data-orientation-value='landscape']").click()
+        # time.sleep(3)
+        # # self.driver.find_element("css selector", "[data-orientation-value='portrait']").click()
+        # # time.sleep(3)
+        # self.driver.find_element("css selector", "[data-orientation-value='square']").click()
+        # time.sleep(3)
+        # self.driver.find_element("css selector", "[data-orientation-value='panorama']").click()
+        # time.sleep(3)
+
+        # self.driver.find_element("css selector", "[data-orientation-value='landscape']").click()
+        # time.sleep(3)
+        # self.driver.find_element("css selector", "[data-orientation-value='portrait']").click()
+        # time.sleep(3)
+        # # self.driver.find_element("css selector", "[data-orientation-value='square']").click()
+        # time.sleep(3)
+        # self.driver.find_element("css selector", "[data-orientation-value='panorama']").click()
+        # time.sleep(3)
+
+        self.driver.find_element("css selector", "[data-orientation-value='landscape']").click()
+        time.sleep(3)
         self.driver.find_element("css selector", "[data-orientation-value='portrait']").click()
         time.sleep(3)
         self.driver.find_element("css selector", "[data-orientation-value='square']").click()
         time.sleep(3)
-        self.driver.find_element("css selector", "[data-orientation-value='panorama']").click()
-        time.sleep(3)
+        # self.driver.find_element("css selector", "[data-orientation-value='panorama']").click()
+        # time.sleep(3)
+
+
+
 
         items = self.driver.find_elements("css selector", "[class='view photo-list-view']>*")
+        count=1
         for item in items:
             stile=item.get_attribute("style")
 
@@ -54,24 +95,16 @@ class TestLogin(BaseTest):
             height = int(stile_parts[6].replace("px;", ""))
             print("aaaaaadfdaaaaaaa")
             print("height:"+str(height))
-            # width = int(x.split(";")[1].replace("width: ", "").replace("px", ""))
-            # height = int(x.split(";")[2].replace("heigt: ", "").replace("px", ""))
-            # item.get_attribute("style")
-        # time.sleep(5)
-        # orientation_list=self.driver.find_elements("css selector", "[class='orientation-list']>*")
-        # for button in orientation_list:
-        #     # button.find_element("css selector", "div").click()
-        #     button.click()
+            count+=1
+            # assert width > height
+            # assert width < height
+            # assert width == height
+            assert width >2* height
+            if count==20:
+                break
 
-        # self.driver.find_element("css selector", "user-select-none").click()
-
-        # self.driver.find_element("id selector", "login-email").send_keys("login-email")
-
-        # self.driver.find_element_by_css_selector("li.gn-signin.tablet-and-desktop-only > a").click()
-        # self.driver.find_element("css selector","li.gn-signin.tablet-and-desktop-only > a").click()
-        # "driver.find_element("css selector", SELECTOR)"
         time.sleep(100)
-        login.enter_password()
+        # login.enter_password()
 
         # login.enter_user_credentials(TestParams.EMPTY_USERNAME, TestParams.EMPTY_PASSWORD)
         # error_msg = login.get_error_login_msg()
